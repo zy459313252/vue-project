@@ -10,7 +10,7 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model.trim="loginForm.username" placeholder="Username" name="username" type="text" tabindex="1" autocomplete="on" />
+        <el-input ref="username" v-model.trim="loginForm.username" placeholder="请输入用户名" name="username" type="text" tabindex="1" autocomplete="on" />
       </el-form-item>
 
       <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
@@ -23,7 +23,7 @@
             ref="password"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            placeholder="请输入密码"
             name="password"
             tabindex="2"
             autocomplete="on"

@@ -4,7 +4,7 @@ import store from '@/store'
 import { getToken } from '@/utils/auth'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: 'http://49.235.226.26:8080/hospital-project-api/',
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })

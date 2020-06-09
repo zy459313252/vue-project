@@ -26,10 +26,10 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/baseData', component: Layout,
+    path: '/dashboard', component: Layout,
     children: [
       {
-        path: 'index', name: 'Dashboard', component: () => import('@/views/dashboard/index'),
+        path: 'index', name: 'dashboard', component: () => import('@/views/dashboard/index'),
         meta: { title: '统计分析', icon: 'dashboard', affix: true }
       }
     ]

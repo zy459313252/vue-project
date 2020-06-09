@@ -20,12 +20,18 @@ export const constantRoutes = [
   { path: '/', component: Layout, redirect: '/dashboard',
     children: [
       {
-        path: 'dashboard', name: 'Dashboard', component: () => import('@/views/dashboard/index'),
-        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
-      },
+        path: 'dashboard', component: () => import('@/views/dashboard/index'), name: 'Dashboard',
+        meta: { title: '首页', icon: 'dashboard', affix: false }
+      }
+    ]
+  },
+  {
+    path: '/baseData', component: Layout, children: [
       {
-        path: 'baseData', name: 'BaseData', component: () => import('@/views/baseData/index'),
-        meta: { title: '基础数据', icon: 'dashboard', affix: false }
+        path: 'index',
+        component: () => import('@/views/baseData/index'),
+        name: 'baseData',
+        meta: { title: '基本数据', icon: 'documentation', affix: true }
       }
     ]
   }
@@ -36,7 +42,6 @@ export const constantRoutes = [
  * 需要根据角色加载路由
  */
 export const asyncRoutes = [
-
   /** when your routing map is too long, you can split it into small modules **/
 
   // {
@@ -51,14 +56,12 @@ export const asyncRoutes = [
 ]
 
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
   routes: constantRoutes
 })
 
 const router = createRouter()
 
-// Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router

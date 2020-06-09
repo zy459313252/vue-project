@@ -17,21 +17,20 @@ export const constantRoutes = [
   { path: '/auth-redirect', component: () => import('@/views/login/auth-redirect'), hidden: true },
   { path: '/404', component: () => import('@/views/error-page/404'), hidden: true },
   { path: '/401', component: () => import('@/views/error-page/401'), hidden: true },
-  { path: '/', component: Layout, redirect: '/dashboard',
+  { path: '/', component: Layout, redirect: '/baseData/index',
     children: [
       {
-        path: 'dashboard', component: () => import('@/views/dashboard/index'), name: 'Dashboard',
-        meta: { title: '首页', icon: 'dashboard', affix: false }
+        path: 'baseData/index', component: () => import('@/views/baseData/index'), name: 'baseData',
+        meta: { title: '基本数据', icon: 'documentation', affix: true }
       }
     ]
   },
   {
-    path: '/baseData', component: Layout, children: [
+    path: '/baseData', component: Layout,
+    children: [
       {
-        path: 'index',
-        component: () => import('@/views/baseData/index'),
-        name: 'baseData',
-        meta: { title: '基本数据', icon: 'documentation', affix: true }
+        path: 'index', name: 'Dashboard', component: () => import('@/views/dashboard/index'),
+        meta: { title: '统计分析', icon: 'dashboard', affix: true }
       }
     ]
   }

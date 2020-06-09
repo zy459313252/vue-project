@@ -48,6 +48,9 @@ export default {
 </style>
 
 <style lang="scss">
+.app-main {
+  padding: 20px;
+}
 // fix css style bug in open el-dialog
 .el-popup-parent--hidden {
   .fixed-header {

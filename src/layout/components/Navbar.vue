@@ -16,21 +16,21 @@
 
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+      <!-- <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <el-button class="avatar-wrapper" @click.native="logout">
-          <!-- <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
-          <i class="el-icon-caret-bottom" /> -->
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <i class="el-icon-caret-bottom" />
           退出
         </el-button>
-        <!-- <el-dropdown-menu slot="dropdown">
+        <el-dropdown-menu slot="dropdown">
           <router-link to="/">
             <el-dropdown-item>首页</el-dropdown-item>
           </router-link>
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">退出</span>
           </el-dropdown-item>
-        </el-dropdown-menu> -->
-      </el-dropdown>
+        </el-dropdown-menu>
+      </el-dropdown> -->
     </div>
   </div>
 </template>

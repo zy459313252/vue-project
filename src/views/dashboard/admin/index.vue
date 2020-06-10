@@ -1,6 +1,85 @@
 <template>
   <el-card style="width:100%; height: 100%">
-    统计分析结果
+    <el-form ref="form" :model="fortable" label-width="80px">
+      <el-row>
+        <el-col :span="6">
+          <el-form-item label="质检日期">
+            <el-date-picker
+              v-model="fortable.date"
+              type="date"
+              placeholder="选择日期"
+              style="width: 100%"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="合格率不低于" label-width="120px">
+            <div style="display: flex; flex-direction: row">
+              <el-input v-model="fortable.percent" />
+              <span style="margin-left: 10px">%</span>
+            </div>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" style="text-align: right">
+          <el-button plain size="mini" icon="el-icon-search" @click="hanldeSearch">搜索</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-download" @click="handleExport">导出</el-button>
+        </el-col>
+      </el-row>
+      <el-table :data="tableData" style="width: 100%; overflow: auto" border empty-text="暂无数据">
+        <el-table-column label="当日质检分析" align="center">
+          <el-table-column label="区县" align="center" />
+          <el-table-column label="当日识别率" align="center" />
+          <el-table-column label="当日工单总量" align="center" />
+          <el-table-column label="合格" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="不合格" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="场景不支持" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="疑似不合格" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="无法识别" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+        </el-table-column>
+        <el-table-column label="月度累计分析" align="center">
+          <el-table-column label="当日识别率" align="center" />
+          <el-table-column label="当日工单总量" align="center" />
+          <el-table-column label="合格" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="不合格" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="场景不支持" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="疑似不合格" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+          <el-table-column label="无法识别" align="center">
+            <el-table-column label="占比" align="center" />
+            <el-table-column label="工单量" align="center" />
+          </el-table-column>
+        </el-table-column>
+        <el-table-column width="150" label=" 合格率参考全省前六指标考核低于97.99%考核线数" align="center" />
+        <el-table-column label="本月考核金额" align="center" />
+        <el-table-column label="智能图片质检通过率" align="center" />
+      </el-table>
+    </el-form>
     <!-- <github-corner class="github-corner" />
 
     <panel-group @handleSetLineChartData="handleSetLineChartData" />
@@ -74,12 +153,23 @@ export default {
   name: 'DashboardAdmin',
   data() {
     return {
+      fortable: {
+        date: '',
+        percent: ''
+      },
+      tableData: []
       // lineChartData: lineChartData.newVisitis
     }
   },
   methods: {
-    handleSetLineChartData(type) {
-      // this.lineChartData = lineChartData[type]
+    // handleSetLineChartData(type) {
+    //   // this.lineChartData = lineChartData[type]
+    // }
+    hanldeSearch() {
+      console.log(2222)
+    },
+    handleExport() {
+      console.log(11111)
     }
   }
 }

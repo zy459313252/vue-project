@@ -189,6 +189,9 @@ export default {
 .el-pagination__total {
   margin-left: 15px;
 }
+ >>> .el-table th, >>> .el-table td {
+  padding: 4px 0;
+}
 
 // >>> .el-pagination .el-select .el-input .el-input__inner {
 //   margin-left: -10px

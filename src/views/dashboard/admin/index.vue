@@ -34,57 +34,57 @@
       </el-row>
       <el-table :data="tableData" style="width: 100%; overflow: auto" border empty-text="暂无数据">
         <el-table-column label="当日质检分析" align="center">
-          <el-table-column label="区县" align="center" />
-          <el-table-column label="当日识别率" align="center" />
-          <el-table-column label="当日工单总量" align="center" />
-          <el-table-column label="合格" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
+          <el-table-column label="区县" prop="province" align="center" />
+          <el-table-column label="当日识别率" prop="rateOfDay" align="center" />
+          <el-table-column label="当日工单总量" prop="ordersOfDay" align="center" />
+          <el-table-column label="合格" prop="qualified" align="center">
+            <el-table-column label="占比" prop="qualifiedProportion" align="center" />
+            <el-table-column label="工单量" prop="qualifiedCount" align="center" />
           </el-table-column>
-          <el-table-column label="不合格" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
+          <el-table-column label="不合格" prop="failed" align="center">
+            <el-table-column label="占比" prop="failedProportion" align="center" />
+            <el-table-column label="工单量" prop="failedCount" align="center" />
           </el-table-column>
-          <el-table-column label="场景不支持" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
+          <el-table-column label="场景不支持" prop="SupProportio" align="center">
+            <el-table-column label="占比" prop="sceneNotSupProportion" align="center" />
+            <el-table-column label="工单量" prop="sceneNotSupCount" align="center" />
           </el-table-column>
-          <el-table-column label="疑似不合格" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
+          <el-table-column label="疑似不合格" prop="FailureProportion" align="center">
+            <el-table-column label="占比" prop="suspectedFailureProportion" align="center" />
+            <el-table-column label="工单量" prop="suspectedFailureCount" align="center" />
           </el-table-column>
-          <el-table-column label="无法识别" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
-          </el-table-column>
-        </el-table-column>
-        <el-table-column label="月度累计分析" align="center">
-          <el-table-column label="当日识别率" align="center" />
-          <el-table-column label="当日工单总量" align="center" />
-          <el-table-column label="合格" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
-          </el-table-column>
-          <el-table-column label="不合格" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
-          </el-table-column>
-          <el-table-column label="场景不支持" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
-          </el-table-column>
-          <el-table-column label="疑似不合格" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
-          </el-table-column>
-          <el-table-column label="无法识别" align="center">
-            <el-table-column label="占比" align="center" />
-            <el-table-column label="工单量" align="center" />
+          <el-table-column label="无法识别" prop=" unrecognized" align="center">
+            <el-table-column label="占比" prop="unrecognizedProportion" align="center" />
+            <el-table-column label="工单量" prop="unrecognizedCount" align="center" />
           </el-table-column>
         </el-table-column>
-        <el-table-column width="150" label=" 合格率参考全省前六指标考核低于97.99%考核线数" align="center" />
-        <el-table-column label="本月考核金额" align="center" />
-        <el-table-column label="智能图片质检通过率" align="center" />
+        <el-table-column label="月度累计分析" prop="mrate" align="center">
+          <el-table-column label="当日识别率" prop="mrateOfDay" align="center" />
+          <el-table-column label="当日工单总量" prop="mrateOfDay" align="center" />
+          <el-table-column label="合格" prop="mqualified" align="center">
+            <el-table-column label="占比" prop="mqualifiedProportion" align="center" />
+            <el-table-column label="工单量" prop="mqualifiedCount" align="center" />
+          </el-table-column>
+          <el-table-column label="不合格" prop="mfailed" align="center">
+            <el-table-column label="占比" prop="mfailedProportion" align="center" />
+            <el-table-column label="工单量" prop="mfailedCount" align="center" />
+          </el-table-column>
+          <el-table-column label="场景不支持" prop="msceneNotSup" align="center">
+            <el-table-column label="占比" prop="msceneNotSupProportion" align="center" />
+            <el-table-column label="工单量" prop="msceneNotSupCount" align="center" />
+          </el-table-column>
+          <el-table-column label="疑似不合格" prop="msuspectedFailure" align="center">
+            <el-table-column label="占比" prop="msuspectedFailureProportion" align="center" />
+            <el-table-column label="工单量" prop="msuspectedFailureCount" align="center" />
+          </el-table-column>
+          <el-table-column label="无法识别" prop="munrecognized" align="center">
+            <el-table-column label="占比" prop="munrecognizedProportion" align="center" />
+            <el-table-column label="工单量" prop="munrecognizedCount" align="center" />
+          </el-table-column>
+        </el-table-column>
+        <el-table-column width="150" label=" 合格率参考全省前六指标考核低于97.99%考核线数" prop="passRateLow" align="center" />
+        <el-table-column label="本月考核金额" prop="assessmentAmount" align="center" />
+        <el-table-column label="智能图片质检通过率" prop="qualityInspection" align="center" />
       </el-table>
     </el-form>
     <!-- <github-corner class="github-corner" />
@@ -175,13 +175,14 @@ export default {
     hanldeSearch() {
       if (!this.fortable.date || !this.fortable.percent) return this.$message({ type: 'warning', message: '质检日期与合格率不可为空！' })
       getTableApi(this.fortable.date, Number(this.fortable.percent)).then(res => {
-        if (res.code === 200) {
+        if (res.status === 200) {
           this.tableData = res.data
         }
       })
     },
     handleExport() {
-      console.log(11111)
+      if (!this.fortable.date || !this.fortable.percent) return this.$message({ type: 'warning', message: '质检日期与合格率不可为空！' })
+      window.open(process.env.VUE_APP_BASE_API + `/imageCount/export?date=${this.fortable.date}&percent=${this.fortable.percent}`)
     }
   }
 }
@@ -205,6 +206,9 @@ export default {
     padding: 16px 16px 0;
     margin-bottom: 32px;
   }
+}
+>>> .el-table th,  >>>.el-table td {
+  padding: 4px 0;
 }
 
 @media (max-width:1024px) {

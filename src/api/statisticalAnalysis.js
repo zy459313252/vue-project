@@ -7,3 +7,10 @@ export function getTableApi(date, percent) {
     method: 'get'
   })
 }
+
+export function exportDataApi(date, percent) {
+  return request({
+    url: `/imageCount/export?date=${date}&percent=${percent}`,
+    method: 'get'
+  })
+}

@@ -3,6 +3,7 @@
   <div :class="classObj" class="app-wrapper">
     <sidebar />
     <navbar />
+    <tags-view v-if="needTagsView" />
     <app-main />
     <right-panel v-if="showSettings">
       <settings />

@@ -38,10 +38,10 @@ module.exports = {
     },
     // http://49.235.226.26:8080/hospital-project-api//passport/usernameIsExist?username=1
     proxy: {
-      '/hospital-project-api': {
+      '/inteliReport': {
         target: 'http://192.168.1.12:8081/',
-        changeOrigin: true,
-        pathRewrite: { '^/hospital-project-api': '' }
+        changeOrigin: true
+        // pathRewrite: { '^/inteliReport': '' }
       }
     }
     // before: require('./mock/mock-server.js')

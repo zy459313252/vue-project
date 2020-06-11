@@ -10,14 +10,13 @@
       </el-col>
       <el-col :span="6">
         <div class="nav-right">
-          <!-- <el-button>退出</el-button> -->
-          <!-- <span>退出</span> -->
           <el-link type="info" @click.native="logout">退出</el-link>
         </div>
       </el-col>
     </el-row>
 
-    <!-- <navbar /> -->
+    <!-- <tags-view v-if="needTagsView" />
+    <navbar /> -->
     <app-main />
     <right-panel v-if="showSettings">
       <settings />
@@ -41,6 +40,7 @@
 <script>
 import RightPanel from '@/components/RightPanel'
 import { AppMain, Settings, Sidebar } from './components'
+// import { AppMain, Navbar, Settings, Sidebar, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 import { mapState } from 'vuex'
 
@@ -51,6 +51,8 @@ export default {
     RightPanel,
     Settings,
     Sidebar
+    // Navbar,
+    // TagsView
   },
   mixins: [ResizeMixin],
   computed: {

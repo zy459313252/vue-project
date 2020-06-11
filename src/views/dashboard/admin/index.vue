@@ -20,8 +20,7 @@
             <div style="display: flex; flex-direction: row">
               <el-input
                 v-model="fortable.percent"
-                onkeyup="this.value=this.value.replace(/^\d+(\.\d{0,2})?$/,'');"
-                maxlength="5"
+                onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')"
               />
               <span style="margin-left: 10px">%</span>
             </div>
@@ -172,8 +171,12 @@ export default {
     // handleSetLineChartData(type) {
     //   // this.lineChartData = lineChartData[type]
     // }
+    handleInput(e) {
+      e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || ''
+    },
     hanldeSearch() {
       if (!this.fortable.date || !this.fortable.percent) return this.$message({ type: 'warning', message: '质检日期与合格率不可为空！' })
+
       getTableApi(this.fortable.date, Number(this.fortable.percent)).then(res => {
         if (res.status === 200) {
           this.tableData = res.data

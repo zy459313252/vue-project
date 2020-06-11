@@ -18,7 +18,11 @@
         <el-col :span="6">
           <el-form-item label="合格率不低于" label-width="120px">
             <div style="display: flex; flex-direction: row">
-              <el-input v-model="fortable.percent" />
+              <el-input
+                v-model="fortable.percent"
+                onkeyup="this.value=this.value.replace(/[^\d.]/g,'');"
+                maxlength="5"
+              />
               <span style="margin-left: 10px">%</span>
             </div>
           </el-form-item>
@@ -151,7 +155,7 @@
 //     actualData: [120, 82, 91, 154, 162, 140, 130]
 //   }
 // }
-
+import { getTableApi } from '@/api/statisticalAnalysis'
 export default {
   name: 'DashboardAdmin',
   data() {
@@ -170,7 +174,11 @@ export default {
     // }
     hanldeSearch() {
       if (!this.fortable.date || !this.fortable.percent) return this.$message({ type: 'warning', message: '质检日期与合格率不可为空！' })
-      alert(this.fortable.date + this.fortable.percent)
+      getTableApi(this.fortable.date, Number(this.fortable.percent)).then(res => {
+        if (res.code === 200) {
+          this.tableData = res.data
+        }
+      })
     },
     handleExport() {
       console.log(11111)

@@ -9,20 +9,27 @@
               type="date"
               placeholder="选择日期"
               style="width: 100%"
-            />
-          </el-form-item>
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+            >
+              />
+            </el-date-picker></el-form-item>
         </el-col>
         <el-col :span="6">
           <el-form-item label="合格率不低于" label-width="120px">
             <div style="display: flex; flex-direction: row">
-              <el-input v-model="fortable.percent" />
+              <el-input
+                v-model="fortable.percent"
+                onkeyup="this.value=this.value.replace(/[^\d.]/g,'');"
+                maxlength="5"
+              />
               <span style="margin-left: 10px">%</span>
             </div>
           </el-form-item>
         </el-col>
         <el-col :span="12" style="text-align: right">
-          <el-button plain size="mini" icon="el-icon-search" @click="hanldeSearch">搜索</el-button>
-          <el-button type="primary" size="mini" icon="el-icon-download" @click="handleExport">导出</el-button>
+          <el-button plain size="medium" icon="el-icon-search" @click="hanldeSearch">搜索</el-button>
+          <el-button type="primary" size="medium" icon="el-icon-download" @click="handleExport">导出</el-button>
         </el-col>
       </el-row>
       <el-table :data="tableData" style="width: 100%; overflow: auto" border empty-text="暂无数据">
@@ -148,7 +155,7 @@
 //     actualData: [120, 82, 91, 154, 162, 140, 130]
 //   }
 // }
-
+import { getTableApi } from '@/api/statisticalAnalysis'
 export default {
   name: 'DashboardAdmin',
   data() {
@@ -166,7 +173,12 @@ export default {
     //   // this.lineChartData = lineChartData[type]
     // }
     hanldeSearch() {
-      console.log(2222)
+      if (!this.fortable.date || !this.fortable.percent) return this.$message({ type: 'warning', message: '质检日期与合格率不可为空！' })
+      getTableApi(this.fortable.date, Number(this.fortable.percent)).then(res => {
+        if (res.code === 200) {
+          this.tableData = res.data
+        }
+      })
     },
     handleExport() {
       console.log(11111)

@@ -39,8 +39,9 @@ module.exports = {
     // http://49.235.226.26:8080/hospital-project-api//passport/usernameIsExist?username=1
     proxy: {
       '/hospital-project-api': {
-        target: 'http://49.235.226.26:8080/',
-        changeOrigin: true
+        target: 'http://192.168.1.10:8088/',
+        changeOrigin: true,
+        pathRewrite: { '^/hospital-project-api': '' }
       }
     }
     // before: require('./mock/mock-server.js')

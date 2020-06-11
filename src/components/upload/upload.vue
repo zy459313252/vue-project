@@ -7,7 +7,7 @@
         点击上传
       </el-button>
     </div>
-    <el-button v-else :loading="loading" style="margin-left:16px;" icon="el-icon-upload" size="mini" type="primary" @click="handleUpload">
+    <el-button v-else :loading="loading" style="margin-left:16px;" icon="el-icon-upload" size="medium" type="primary" @click="handleUpload">
       点击上传
     </el-button>
   </div>

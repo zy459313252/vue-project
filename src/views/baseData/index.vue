@@ -1,9 +1,10 @@
 <template>
   <el-card style="height: 100%">
     <el-row>
+      <!-- <el-col :span="12">工单明细列表</el-col> -->
       <el-col style="text-align: right; padding-bottom: 20px">
         <fileUpload :on-success="handleSuccess" :before-upload="beforeUpload">导入</fileUpload>
-        <el-button size="mini" type="danger" @click="batchDelete">批量删除</el-button>
+        <el-button size="medium" type="danger" @click="batchDelete">批量删除</el-button>
       </el-col>
     </el-row>
     <el-table :data="tableData" style="width: 100%; overflow: auto; max-height: 760px; background: red" border @selection-change="handleSelectionChange">
@@ -62,6 +63,16 @@
         <el-table-column prop="portUsage" label="占用端口量" width="200" align="center" />
       </el-table-column>
     </el-table>
+    <el-pagination
+      background
+      :current-page="page.pageNum"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
+      layout="sizes, prev, pager, next, jumper, total"
+      :total="page.total"
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+    />
   </el-card>
 </template>
 <script>
@@ -72,6 +83,11 @@ export default {
   components: { fileUpload },
   data() {
     return {
+      page: {
+        pageNum: 1,
+        pageSize: 10,
+        total: 2
+      },
       tableData: [
         {
           id: 1,
@@ -142,7 +158,39 @@ export default {
       importBaseDataExeclApi(file).then(res => {
         console.log(res)
       })
+    },
+    handleSizeChange(val) {
+      this.page.pageSize = val
+    },
+    handleCurrentChange(val) {
+      this.page.pageSize = val
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+.el-pagination {
+  margin-top: 30px;
+  text-align: right;
+  position: relative;
+  font-size: 15px;
+}
+.el-button {
+  margin-left: 10px;
+}
+>>> .el-pagination__sizes {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+>>> .el-pagination .el-select .el-input {
+  margin-left: -10px;
+}
+.el-pagination__total {
+  margin-left: 15px;
+}
+
+// >>> .el-pagination .el-select .el-input .el-input__inner {
+//   margin-left: -10px
+// }
+</style>

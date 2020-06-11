@@ -1,13 +1,36 @@
 <template>
   <el-card style="height: 100%">
-    <el-row>
-      <!-- <el-col :span="12">工单明细列表</el-col> -->
-      <el-col style="text-align: right; padding-bottom: 20px">
+    <el-form ref="form" label-width="80px">
+      <el-row>
+        <el-col :span="6">
+          <el-form-item label="质检日期">
+            <el-date-picker
+              v-model="page.date"
+              type="date"
+              placeholder="选择日期"
+              style="width: 100%"
+              format="yyyy 年 MM 月 dd 日"
+              value-format="yyyy-MM-dd"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="6">
+          <el-form-item label="装维工号">
+            <el-input v-model="page.workNum" maxlength="5" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')" />
+          </el-form-item>
+        </el-col>
+        <el-col :span="12" style="text-align: right">
+          <el-button plain size="medium" icon="el-icon-search" @click="getList(1)">搜索</el-button>
+          <fileUpload :on-success="handleSuccess" :before-upload="beforeUpload" :loading="loading">导入</fileUpload>
+          <el-button size="medium" type="danger" @click="batchDelete">批量删除</el-button>
+        </el-col>
+      </el-row>
+      <!-- <div style="margin-bottom:10px;text-align:right">
         <fileUpload :on-success="handleSuccess" :before-upload="beforeUpload">导入</fileUpload>
         <el-button size="medium" type="danger" @click="batchDelete">批量删除</el-button>
-      </el-col>
-    </el-row>
-    <el-table :data="tableData" style="width: 100%; overflow: auto; max-height: 760px; background: red" border @selection-change="handleSelectionChange">
+      </div> -->
+    </el-form>
+    <el-table :data="tableData" border @selection-change="handleSelectionChange">
 
       <el-table-column type="selection" width="80" align="center" />
       <el-table-column prop="workOrderInfo" label="工单信息" width="600" align="center">
@@ -20,7 +43,11 @@
         <el-table-column prop="splitRatio" label="分光比" width="200" align="center" />
         <el-table-column prop="boxUniqueIdentification" label="分纤箱唯一标识" width="200" align="center" />
         <el-table-column prop="distributorBoxName" label="分纤箱名称" width="200" align="center" />
-        <el-table-column prop="splitterName" label="分光器名称" width="200" align="center" />
+        <el-table-column prop="splitterName" label="分光器名称" width="200" align="center">
+          <template slot-scope="scope">
+            <div class="line-clamp">{{ scope.row.splitterName }}</div>
+          </template>
+        </el-table-column>
         <el-table-column prop="beamSplitterIdentification" label="分光器标识" width="200" align="center" />
         <el-table-column prop="pigtailCodeIdentification" label="尾纤二维码标识" width="200" align="center" />
         <el-table-column prop="portNumber" label="端口号" width="200" align="center" />
@@ -29,7 +56,11 @@
         <el-table-column prop="qutfitNum" label="装维工号" width="200" align="center" />
         <el-table-column prop="qutfitName" label="装维姓名" width="200" align="center" />
         <el-table-column prop="userInfo" label="装维手机号" width="200" align="center" />
-        <el-table-column prop="subsidiaryCompany" label="所属代维公司" width="200" align="center" />
+        <el-table-column prop="subsidiaryCompany" label="所属代维公司" width="200" align="center">
+          <template slot-scope="scope">
+            <div class="line-clamp">{{ scope.row.subsidiaryCompany }}</div>
+          </template>
+        </el-table-column>
       </el-table-column>
       <el-table-column prop="userInfo" label="用户信息" width="600" align="center">
         <el-table-column prop="broadbandAccount" label="宽带账号" width="200" align="center" />
@@ -39,7 +70,11 @@
         <el-table-column prop="province" label="省" width="200" align="center" />
         <el-table-column prop="city" label="市" width="200" align="center" />
         <el-table-column prop="area" label="区" width="200" align="center" />
-        <el-table-column prop="address" label="详细地址" width="200" align="center" />
+        <el-table-column prop="address" label="详细地址" width="200" align="center">
+          <template slot-scope="scope">
+            <div class="line-clamp">{{ scope.row.address }}</div>
+          </template>
+        </el-table-column>
         <el-table-column prop="addressType" label="地址类型" width="200" align="center" />
         <el-table-column prop="owningGrid" label="所属网格" width="200" align="center" />
       </el-table-column>
@@ -77,77 +112,48 @@
 </template>
 <script>
 import fileUpload from '@/components/upload/upload'
-import { importBaseDataExeclApi, batchDeleteApi } from '@/api/baseData'
+import { importBaseDataExeclApi, batchDeleteApi, getBaseDataListApi } from '@/api/baseData'
 export default {
   name: '',
   components: { fileUpload },
   data() {
     return {
+      loading: false,
       page: {
+        date: '',
+        workNum: '',
+
         pageNum: 1,
         pageSize: 10,
         total: 2
       },
-      tableData: [
-        {
-          id: 1,
-          workOrderNum: '111111',
-          workCompleteDate: '111111',
-          workType: '111111',
-          overlaySceneType: '11111',
-          bussType: '11111',
-          spectralMode: '11111',
-          splitRatio: '11111',
-          boxUniqueIdentification: '1111',
-          distributorBoxName: '11111',
-          splitterName: '11111',
-          beamSplitterIdentification: '1111',
-          pigtailCodeIdentification: '1111',
-          portNumber: '1111',
-          qutfitNum: '111',
-          qutfitName: '1111',
-          subsidiaryCompany: '1111',
-          broadbandAccount: '1111',
-          isHeadCustomer: '是',
-          userPhone: '111',
-          userName: '111',
-          province: '浙江',
-          city: '杭州',
-          area: 'bingjiang',
-          address: '11',
-          addressType: '11',
-          owningGrid: '111',
-          qualityInspectionResults: '111',
-          qualityCompletDate: '11',
-          reason: '11',
-          manualReviewResults: '11',
-          manualReviewResultsReason: '11',
-          manualReviewResultsDate: '111',
-          qualityInspectionIsAccurate: '11',
-          inaccurateCause: '11',
-          remarks: '111',
-          totalPort: '111',
-          newlyInstalledNum: '11',
-          quantityPortsNum: '111',
-          portUsage: '111'
-        }
-      ],
-      idArr: []
+      tableData: [],
+      ids: []
     }
+  },
+  mounted() {
+    this.getList(1)
   },
   methods: {
     // 批量删除
     batchDelete() {
-      if (this.idArr.length <= 0) {
-        // alert()
+      if (this.ids.length <= 0) {
+        this.$message({
+          message: '请选择需要删除的行',
+          type: 'warning'
+        })
         return
       }
-      batchDeleteApi({ idArr: this.idArr }).then(res => {
+      batchDeleteApi({ ids: this.ids.join(',') }).then(res => {
+        if (res.status !== 200) {
+          this.$message({ message: res.msg, type: 'error' })
+          return
+        }
         console.log(res)
       })
     },
     handleSelectionChange(val) {
-      this.idArr = val.map(item => item.id)
+      this.ids = val.map(item => item.id)
     },
     handleSuccess() {
       console.log('成功')
@@ -155,15 +161,31 @@ export default {
     // 文件上传钩子
     beforeUpload(file) {
       console.log('file', file)
+      this.loading = true
       importBaseDataExeclApi(file).then(res => {
+        this.loading = false
         console.log(res)
       })
     },
     handleSizeChange(val) {
       this.page.pageSize = val
+      this.getList(1)
     },
     handleCurrentChange(val) {
-      this.page.pageSize = val
+      this.getList(val)
+    },
+    getList(pageNum) {
+      if (pageNum) {
+        this.page.pageNum = pageNum
+      }
+      if (!this.page.date) {
+        this.page.date = ''
+      }
+      console.log('this.page', this.page)
+      getBaseDataListApi(this.page).then(res => {
+        this.tableData = res.data.rows
+        this.page.total = res.data.total
+      })
     }
   }
 }
@@ -189,7 +211,7 @@ export default {
 .el-pagination__total {
   margin-left: 15px;
 }
- >>> .el-table th, >>> .el-table td {
+>>> .el-table th,  >>>.el-table td {
   padding: 4px 0;
 }
 

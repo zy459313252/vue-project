@@ -39,7 +39,7 @@ module.exports = {
     // http://49.235.226.26:8080/hospital-project-api//passport/usernameIsExist?username=1
     proxy: {
       '/hospital-project-api': {
-        target: 'http://192.168.1.10:8088/',
+        target: 'http://192.168.1.12:8081/',
         changeOrigin: true,
         pathRewrite: { '^/hospital-project-api': '' }
       }

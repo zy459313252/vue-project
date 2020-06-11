@@ -20,7 +20,7 @@
             <div style="display: flex; flex-direction: row">
               <el-input
                 v-model="fortable.percent"
-                onkeyup="this.value=this.value.replace(/[^\d.]/g,'');"
+                onkeyup="this.value=this.value.replace(/^\d+(\.\d{0,2})?$/,'');"
                 maxlength="5"
               />
               <span style="margin-left: 10px">%</span>

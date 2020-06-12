@@ -161,6 +161,7 @@ export default {
     // 文件上传钩子
     beforeUpload(file) {
       console.log('file', file)
+      if (this.loading === true) return
       this.loading = true
       importBaseDataExeclApi(file).then(res => {
         this.loading = false

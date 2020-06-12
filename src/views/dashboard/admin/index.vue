@@ -21,6 +21,7 @@
               <el-input
                 v-model="fortable.percent"
                 onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')"
+                @blur="handleLabelPercent"
               />
               <span style="margin-left: 10px">%</span>
             </div>
@@ -81,7 +82,7 @@
             <el-table-column label="工单量" prop="munrecognizedCount" align="center" />
           </el-table-column>
         </el-table-column>
-        <el-table-column width="150" label=" 合格率参考全省前六指标考核低于97.99%考核线数" prop="passRateLow" align="center" />
+        <el-table-column width="150" :label="labelPercent" prop="passRateLow" align="center" />
         <el-table-column label="本月考核金额" prop="assessmentAmount" align="center" />
         <el-table-column label="智能图片质检通过率" prop="qualityInspection" align="center" />
       </el-table>
@@ -163,7 +164,8 @@ export default {
         date: '',
         percent: ''
       },
-      tableData: []
+      tableData: [],
+      labelPercent: '合格率参考全省前六指标考核低于0%考核线数'
       // lineChartData: lineChartData.newVisitis
     }
   },
@@ -171,6 +173,9 @@ export default {
     // handleSetLineChartData(type) {
     //   // this.lineChartData = lineChartData[type]
     // }
+    handleLabelPercent() {
+      this.labelPercent = '合格率参考全省前六指标考核低于' + this.fortable.percent + '%考核线数'
+    },
     handleInput(e) {
       e.target.value = (e.target.value.match(/^\d*(\.?\d{0,1})/g)[0]) || ''
     },
